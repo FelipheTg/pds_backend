@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "lib": ["es5","es6", "ES2018"],
+        "experimentalDecorators": true, // Habilita uso de decorators
+        "emitDecoratorMetadata": true, // habilita uso de decoratos
+        "module": "commonjs", // metodo de exportação/importação
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "outDir": "./build", // onde vão ser transpolados os codigos JS
+        "strict": true,
+        "noImplicitAny": true,
+        "strictPropertyInitialization": false
+    },
+    "include": ["src/**/*"], // inclui todos os arquivos .ts dentro de src
+    "exclude": ["node_modules", "dist"], // exclui os arquivos das pastas node_modules edist
+    "ts-node": {
+        "files": true
+    }
+}
