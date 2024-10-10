@@ -25,6 +25,7 @@ type updateTaskRequest = {
 
 export class TaskService {
     async createTask ({description, date_task}: newTaskRequest) : Promise< Task | Error> {
+       try {
         // Insert into tasks VALUES( description, date_task)
         const  task = cursor.create({
             description, date_task
@@ -34,32 +35,49 @@ export class TaskService {
         await cursor.save(task)
         return task
     }
+
+     catch(err){
+        return new Error("Unexpected error saving task") 
+
+      }
+     }
     
     async readOneTask ({id}: findTaskRequest) : Promise <Task | Error> {
-        //SELECT * From task where id = id LIMIT 1
-        const task = await cursor.findOne({ where : {id}})
-        if (!task) {
-            return new Error("Task not Found!")
+        try {
+            //SELECT * From task where id = id LIMIT 1
+            const task = await cursor.findOne({ where : {id}})
+            if (!task) {
+             return new Error("Task not Found!")
+         }
+         return task 
         }
-        return task 
+        catch(err) {
+            return new Error ("Unexpected error reading task!")
+        }
     
     }
     
-    async readAllTask () {
+    async readAllTask (): Promise <Task [] | Error> {
+        try {
         // SELECT * FROM tasks ( Ele acha a tabela)
         const tasks = await cursor.find()
         return tasks
-    
+
+    }
+    catch(err){
+        return new Error("Unexpected error reading task!")
+      }
     }
     
     
     async updateTask ({id, description, date_task }: updateTaskRequest) : Promise <Task | Error> {
-        
+        try {
+            // SELECT * FROM tasks WHERE id = id LIMIT 1
         const task = await cursor.findOne({ where : {id}})
         if (!task) {
             return new Error("Task not Found!")
         }
-              
+         // Se houver uma nova descrição e/ou data informadors pelo usuario vindos da requisição    
         task.description = description ? description : task.description
         task.date_task = date_task ? date_task : task.date_task
 
@@ -68,10 +86,15 @@ export class TaskService {
         return task
     
     }
+    catch(err) {
+        return new  Error("Unexpected error reading task!")
+     }
+    }
       
 
 
     async  deleteTask ({id}: findTaskRequest): Promise <String | Error > {
+        try{
        //SELECT * FROM Task WHERE id = id LIMIT 1
         const task = await cursor.findOne({ where : {id}})
         if (!task) {
@@ -80,6 +103,10 @@ export class TaskService {
     await cursor.delete(task.id)
     return "Task removed successfully"
     }
+    catch (err) {
+        return new Error ("Unexpected error reading task!")
+    }
+ }
 }
 
 
