@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryColumn } from "typeorm"
 import { v4 as uuid } from "uuid"
-@Entity("tasks")
 
+@Entity("teste")
 export class Task {
     @PrimaryColumn()
     id: string
     
-    @Column()
+    @Column({nullable: false})
     description: string
 
     @Column()

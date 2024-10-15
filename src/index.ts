@@ -1,5 +1,5 @@
 import { DevDataSource } from "./connections/dbDev";
-import rotas from "./routes/routes";
+import router from "./routes/routes";
 import express = require ("express")
 
 //Inicializar a conexão com o banco de dados quando o servidor subir 
@@ -11,7 +11,10 @@ DevDataSource.initialize().then()
  const app = express()
  // Configura o servidor para a leitura de arquvivos JSON
  app.use(express.json())
+// Adiciona arquivo de rotas
 
- app.listen(333, () => console.log("server online on port 3333."))
+ app.use(router)
+
+ app.listen(3333, () => console.log("server online on port 3333."))
 
  

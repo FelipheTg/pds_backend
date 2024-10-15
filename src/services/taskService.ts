@@ -57,7 +57,7 @@ export class TaskService {
     
     }
     
-    async readAllTask (): Promise <Task [] | Error> {
+    async readAllTask (): Promise <Task[] | Error> {
         try {
         // SELECT * FROM tasks ( Ele acha a tabela)
         const tasks = await cursor.find()

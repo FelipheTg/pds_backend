@@ -26,7 +26,7 @@ export class TaskController {
        //Se a lista estiver vazia
         if (result.length == 0) {
             // Mostre a seguinte mensagem para usuario
-            return res.status(200).json(" No tasks found")
+            return res.status(200).json("No tasks found")
         }
         // Do contrario, devolva a lista para o usuario
         return res.status(200).json(result)
@@ -37,7 +37,7 @@ export class TaskController {
         if (result instanceof Error) {
             res.status(404).json(result.message)
         }
-        return res.json(result)
+        return res.status(200).json(result)
     }
     async updateTask (req: Request, res: Response) {
         const {id} = req.params
