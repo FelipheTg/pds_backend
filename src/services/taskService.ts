@@ -59,8 +59,14 @@ export class TaskService {
     
     async readAllTask (): Promise <Task[] | Error> {
         try {
+            console.log("passei aqui")
         // SELECT * FROM tasks ( Ele acha a tabela)
         const tasks = await cursor.find()
+        console.log("passei aqui 2")
+        if (!tasks){
+            console.log("vazio")
+        }
+        console.log(tasks)
         return tasks
 
     }
