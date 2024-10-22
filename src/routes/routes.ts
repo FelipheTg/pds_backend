@@ -10,7 +10,7 @@ router.get("/", (request, response) => {
 
 // Rota Read All
 router.get("/tasks", controller.readAllTask) 
-// Rota 
+// Rota Read One
 router.get("/tasks/:id",controller.readOneTask)
 
 router.post("/tasks", controller.createTask)
